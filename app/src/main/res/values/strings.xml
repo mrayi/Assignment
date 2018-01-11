@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Hello Shape</string>
+    <string name="btn_logIn">Log In</string>
+    <string name="btn_continueGuest">Continue As Guest</string>
+    <string name="btn_joinNow">Join Now</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="confirmPass">Confirm Password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="baby">Baby</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Strings related Menu-->
+    <string name="dialogFragment">Let Learn Shape</string>
+    <string name="watch">Watch Video</string>
+    <string name="play">Play Video</string>
+    <!-- Game Fragment -->
+    <string name="score">Score: </string>
+    <string name="zero">0</string>
+    <string name="arTool">Augmented Reality</string>
+    <string name="cheatTool">Cheating</string>
+    <string name="imgShape">Shape</string>
+    <string name="circle">Circle</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="triangle">Triangle</string>
+    <string name="pentagon">Pentagon</string>
+    <string name="hexagon">Hexagon</string>
+    <string name="anshere">Answer Here!!</string>
+    <string name="yourscore">Your Score: #</string>
+    <string name="yourname">Enter Your Name: </string>
+    <string name="egname">E.g. Ayi</string>
+    <string name="submit">Submit</string>
+</resources>
