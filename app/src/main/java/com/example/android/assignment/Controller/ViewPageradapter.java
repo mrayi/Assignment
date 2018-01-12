@@ -1,5 +1,6 @@
 package com.example.android.assignment.Controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
@@ -18,7 +19,7 @@ import com.example.android.assignment.R;
  * Created by Jack on 2018-01-07.
  */
 
-public class ViewPageradapter extends PagerAdapter implements View.OnClickListener {
+public class ViewPageradapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
@@ -46,14 +47,17 @@ public class ViewPageradapter extends PagerAdapter implements View.OnClickListen
         imageView.setImageResource(images[position]);
 
         Button buttonGuest = (Button) view.findViewById(R.id.ButtonGuest);
-        Button buttonLogin = (Button) view.findViewById(R.id.ButtonLogin);
-        Button buttonJoinNow = (Button) view.findViewById(R.id.ButtonJoinNow);
 
-        buttonGuest.setOnClickListener(this);
 
-        buttonLogin.setOnClickListener(this);
+        buttonGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                v.getContext().startActivity(intent);
+            }
+        });
 
-        buttonJoinNow.setOnClickListener(this);
 
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);
@@ -67,19 +71,4 @@ public class ViewPageradapter extends PagerAdapter implements View.OnClickListen
         vp.removeView(view);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-
-        switch (v.getId()) {
-            case R.id.ButtonGuest: {
-                intent = new Intent(v.getContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                v.getContext().startActivity(intent);
-                break;
-            }
-            default:
-                break;
-        }
-    }
 }

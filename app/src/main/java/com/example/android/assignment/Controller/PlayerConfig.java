@@ -1,4 +1,4 @@
-package com.example.android.assignment;
+package com.example.android.assignment.Controller;
 
 /**
  * Created by Jack on 2018-01-10.

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,22 +26,23 @@ import java.util.Map;
 
 public class RankingActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-        final TextView textView4 =  (TextView) findViewById(R.id.textView4);
-        final TextView textView5 =  (TextView) findViewById(R.id.textView5);
-        final TextView textView6 =  (TextView) findViewById(R.id.textView6);
-        final TextView textView7 =  (TextView) findViewById(R.id.textView7);
-        final TextView textView8 =  (TextView) findViewById(R.id.textView8);
-        final TextView textView9 =  (TextView) findViewById(R.id.textView9);
-
-        final TextView textView10 =  (TextView) findViewById(R.id.textView10);
-        final TextView textView12 =  (TextView) findViewById(R.id.textView12);
-        final TextView textView13 =  (TextView) findViewById(R.id.textView13);
-        final TextView textView14 =  (TextView) findViewById(R.id.textView14);
+        final TextView textView4 = (TextView)findViewById(R.id.textView4);
+        final TextView textView5 = (TextView) findViewById(R.id.textView5);
+        final TextView textView6 = (TextView) findViewById(R.id.textView6);
+        final TextView textView7 = (TextView) findViewById(R.id.textView7);
+        final TextView textView8 = (TextView) findViewById(R.id.textView8);
+        final TextView textView9 = (TextView) findViewById(R.id.textView9);
+        final TextView textView10 = (TextView) findViewById(R.id.textView10);
+        final TextView textView12 = (TextView) findViewById(R.id.textView12);
+        final TextView textView13 = (TextView) findViewById(R.id.textView13);
+        final TextView textView14 = (TextView) findViewById(R.id.textView14);
+        final ImageView imageView1st = (ImageView) findViewById(R.id.imageView1st);
+        final ImageView imageView2nd = (ImageView) findViewById(R.id.imageView2nd);
+        final ImageView imageView3rd = (ImageView) findViewById(R.id.imageView3rd);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = "https://www.semiit.com/ranking.php";
@@ -68,6 +70,9 @@ public class RankingActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+                            imageView1st.setImageResource(R.drawable.first);
+                            imageView2nd.setImageResource(R.drawable.second);
+                            imageView3rd.setImageResource(R.drawable.third);
                             textView4.setText("1. " + nameList.get(0) + "    "+ integerList.get(0));
                             textView5.setText("2. " +  nameList.get(1)  + "    "+integerList.get(1));
                             textView6.setText("3. " +  nameList.get(2)  + "    "+integerList.get(2));

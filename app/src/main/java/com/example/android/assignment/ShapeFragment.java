@@ -1,8 +1,8 @@
 package com.example.android.assignment;
 
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.app.Fragment;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.android.assignment.Controller.GridViewAdapter;
@@ -23,10 +22,10 @@ import com.example.android.assignment.Controller.GridViewAdapter;
 public class ShapeFragment extends Fragment {
 
     GridView gv;
-    Button btn;
     String[] shapeName = {"Circle", "Triangle", "Square", "Rectangle", "Pentagon", "Hexagon"};
-    String[] desc = {"Yellow Color", "Orange Color", "Blue Color", "Green Color", "Red Color", "Purple Color"};
     int[] images = {R.drawable.circle, R.drawable.triangle, R.drawable.square, R.drawable.rectangle, R.drawable.pentagon, R.drawable.hexagon};
+    int[] sounds = {R.raw.pronunciation_en_circle, R.raw.pronunciation_en_triangle, R.raw.pronunciation_en_square, R.raw.pronunciation_en_rectangle, R.raw.pronunciation_en_pentagon, R.raw.pronunciation_en_hexagon};
+
     private Toast toast;
 
     @Nullable
@@ -35,12 +34,16 @@ public class ShapeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_shape, container, false);
         gv = (GridView) rootView.findViewById(R.id.gvShape);
 
-        GridViewAdapter adapter = new GridViewAdapter(getActivity(), shapeName, desc, images);
+        GridViewAdapter adapter = new GridViewAdapter(getActivity(), images);
         gv.setAdapter(adapter);
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final MediaPlayer sound = MediaPlayer.create(getActivity(), sounds[position]);
+                sound.start();
+
                 if(toast != null){
                     toast.cancel();
                 }
@@ -48,16 +51,6 @@ public class ShapeFragment extends Fragment {
                 toast.show();
             }
         });
-
-        btn = (Button) rootView.findViewById(R.id.ButtonWatch);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), VideoActivity.class);
-                startActivity(intent);
-            }
-        });
-
         return rootView;
     }
 

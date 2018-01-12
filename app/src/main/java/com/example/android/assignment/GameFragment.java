@@ -17,12 +17,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.assignment.Controller.GridViewAdapter;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +44,7 @@ public class GameFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    static final int AUGMENTED_REALITY_REQUEST = 1;
     private Field[] drawablesFields;
     private ArrayList<Field> drawables = new ArrayList<>();
     private ImageView imageView;
@@ -50,9 +53,12 @@ public class GameFragment extends Fragment {
     private Button btnTri;
     private Button btnPent;
     private Button btnHex;
+    private ImageButton ibAr;
     private TextView tvScore;
     private Field curShape;
     private static int round;
+    private static int ar;
+    private List<String> myData;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,7 +86,6 @@ public class GameFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-        round = 0;
         return fragment;
     }
 
@@ -97,6 +102,7 @@ public class GameFragment extends Fragment {
         drawablesFields = com.example.android.assignment.R.drawable.class.getFields();
         drawables = new ArrayList<>();
         round = 0;
+        ar = 1;
 
         // Get all shape name from drawable.
         for (Field field : drawablesFields) {
@@ -133,6 +139,7 @@ public class GameFragment extends Fragment {
         btnPent = (Button) rootView.findViewById(R.id.btnPent);
         btnHex = (Button) rootView.findViewById(R.id.btnHex);
         tvScore = (TextView) rootView.findViewById(R.id.tvScore);
+        ibAr = (ImageButton) rootView.findViewById(R.id.ibAr);
 
         Initialize();
 
@@ -156,8 +163,8 @@ public class GameFragment extends Fragment {
                 round++;
                 if(round == 10) {
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
+                    intent.putExtra("score", String.valueOf(score[0]));
+                    getActivity().startActivity(intent);
                     Initialize();
                     getActivity().getFragmentManager().popBackStack();
                 }
@@ -181,8 +188,8 @@ public class GameFragment extends Fragment {
                 round++;
                 if(round == 10) {
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
+                    intent.putExtra("score", String.valueOf(score[0]));
+                    getActivity().startActivity(intent);
                     Initialize();
                     getActivity().getFragmentManager().popBackStack();
                 }
@@ -206,8 +213,8 @@ public class GameFragment extends Fragment {
                 round++;
                 if(round == 10) {
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
+                    intent.putExtra("score", String.valueOf(score[0]));
+                    getActivity().startActivity(intent);
                     Initialize();
                     getActivity().getFragmentManager().popBackStack();
                 }
@@ -231,8 +238,8 @@ public class GameFragment extends Fragment {
                 round++;
                 if(round == 10) {
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
+                    intent.putExtra("score", String.valueOf(score[0]));
+                    getActivity().startActivity(intent);
                     Initialize();
                     getActivity().getFragmentManager().popBackStack();
                 }
@@ -256,10 +263,22 @@ public class GameFragment extends Fragment {
                 round++;
                 if(round == 10) {
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("score", score);
-                    startActivity(intent);
+                    intent.putExtra("score", String.valueOf(score[0]));
+                    getActivity().startActivity(intent);
                     Initialize();
                     getActivity().getFragmentManager().popBackStack();
+                }
+            }
+        });
+
+        ibAr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ar == 1) {
+                    ar = 0;
+                    ibAr.setImageResource(R.drawable.artoolx);FragmentManager fragmentManager = getFragmentManager();
+                    Intent intent = new Intent(getActivity(), ArActivity.class);
+                    getActivity().startActivityForResult(intent, AUGMENTED_REALITY_REQUEST);
                 }
             }
         });
@@ -305,5 +324,20 @@ public class GameFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("list", (Serializable) myData);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //probably orientation change
+            myData = (List<String>) savedInstanceState.getSerializable("list");
+        }
     }
 }
